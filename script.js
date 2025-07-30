@@ -27,8 +27,18 @@ function displayBooks() {
     });
 
     document.querySelectorAll(".removeBtn").forEach(btn => {
-        btn.onclick = () => removeBookById(btn.dataset.id)
+        btn.onclick = () => removeBookById(btn.dataset.id);
     })
+
+    document.querySelectorAll(".toggleBtn").forEach(btn => {
+        btn.onclick = () => {
+            const book = myLibrary.find(b => b.id === btn.dataset.id);
+            if(book) {
+                book.toggleRead();
+                displayBooks();
+            }
+        }
+    });
 }
 
 function removeBookById(id) {
@@ -43,6 +53,29 @@ Book.prototype.toggleRead = function() {
     this.read = !this.read;
 };
 
+const newBookbtn = document.getElementById("newBookBtn");
+const bookDialog = document.getElementById("bookDialog");
+
+newBookbtn.onclick = () => {
+    bookDialog.showModal();
+};
 
 addBookToLibrary("1984", "George Orwell", 328, true);
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
+
+
+bookForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(bookForm);
+    const title = formData.get("title");
+    const author = formData.get("author");
+    const pages = Number(formData.get("pages"));
+    const read = formData.get("read") === "on";
+
+    const book = new Book(title, author, pages, read);
+    myLibrary.push(book);
+    bookForm.reset();
+    bookDialog.close();
+    displayBooks();
+});
