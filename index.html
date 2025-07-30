@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Skeleton</title>
+</head>
+<body>
+    <h1>My Library</h1>
+    <button id="newBookBtn">+ New Book</button>
+    <div id="libraryDisplay"></div>
+
+    <dialog id="bookDialog">
+        <form id="bookForm">
+            <h2>Add New Book</h2>
+            <input type="text" name="title" placeholder="Title" required><br><br>
+            <input type="text" name="author" placeholder="Author" required><br><br>
+            <input type="number" name="pages" placeholder="Pages" required><br><br>
+            <label><input type="checkbox" name="read"> Already Read?</label><br><br>
+            <button type="submit">Add Book</button>
+            <button type="button" onclick="bookDialog.close()">Cancel</button>
+        </form>
+    </dialog>
+    <script src="script.js"></script>
+</body>
+</html>
